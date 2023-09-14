@@ -21,7 +21,6 @@ protected:
    cwc::glShaderManager SM;
    cwc::glShader *shader;
    cwc::glShader* shader1; //Para Textura: variable para abrir los shader de textura
-   cwc::glShader* shaderUlises; // Shader de textura para Ulises.
    GLuint ProgramObject;
    clock_t time0,time1;
    float timer010;  // timer counting 0->1->0
@@ -95,16 +94,14 @@ public:
 		  glBindTexture(GL_TEXTURE_2D, texid);
 		  glmDraw(objmodel_ptr1, GLM_SMOOTH | GLM_MATERIAL | GLM_TEXTURE);
 		  glPopMatrix();
-	  //glutSolidTeapot(1.0);
-	  if (shader1) shader1->end();
 
-	  if (shaderUlises) shaderUlises->begin();
 		  glPushMatrix();
 		  glTranslatef(1.5f, 0.0f, 0.0f);
 		  glBindTexture(GL_TEXTURE_2D, texid);
 		  glmDraw(ulisesmodel_ptr, GLM_SMOOTH | GLM_MATERIAL | GLM_TEXTURE);
 		  glPopMatrix();
-	  if (shaderUlises) shaderUlises->end();
+	  //glutSolidTeapot(1.0);
+	  if (shader1) shader1->end();
 
 
       glutSwapBuffers();
@@ -173,7 +170,6 @@ public:
 		  glmFacetNormals(ulisesmodel_ptr);
 		  glmVertexNormals(ulisesmodel_ptr, 90.0);
 	  }
-
 	  //*** Para Textura: abrir malla de objeto a texturizar
 	  objmodel_ptr1 = NULL;
 
