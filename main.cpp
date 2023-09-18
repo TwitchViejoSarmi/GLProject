@@ -26,34 +26,38 @@ protected:
    float timer010;  // timer counting 0->1->0
    bool bUp;        // flag if counting up or down.
    GLMmodel* ulisesmodel_ptr; // Malla de Ulises.
-   GLMmodel* objmodel_ptr;
-   GLMmodel* objmodel_ptr1; //*** Para Textura: variable para objeto texturizado
    GLuint texid; //*** Para Textura: variable que almacena el identificador de textura
 
 
 public:
 	myWindow(){}
 
-	//*** Para Textura: aqui adiciono un m�todo que abre la textura en JPG
-	void initialize_textures(void)
-	{
-		int w, h;
-		GLubyte* data = 0;
-		//data = glmReadPPM("soccer_ball_diffuse.ppm", &w, &h);
-		//std::cout << "Read soccer_ball_diffuse.ppm, width = " << w << ", height = " << h << std::endl;
-
-		//dib1 = loadImage("soccer_ball_diffuse.jpg"); //FreeImage
-
-		glGenTextures(1, &texid);
-		glBindTexture(GL_TEXTURE_2D, texid);
+	void generateIdentifier(GLuint& textureID) {
+		/*
+		Método encargado de generar un identificador de textura.
+		Args:
+		fileroute (const char*): La ruta de acceso a la imagen.
+		Returns:
+			void
+		*/
+		glGenTextures(1, &textureID);
+		glBindTexture(GL_TEXTURE_2D, textureID);
 		glTexEnvi(GL_TEXTURE_2D, GL_TEXTURE_ENV_MODE, GL_MODULATE);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-
+	}
+	/**
+	* Método encargado de cargar una Textura cuando se tiene como imagen.
+	*
+	* @param fileroute: La ruta de acceso a la imagen.
+	* @return void.
+	*/
+	void loadTexture(const char* fileroute) {
+		
 		// Loading JPG file
 		FIBITMAP* bitmap = FreeImage_Load(
-			FreeImage_GetFileType("./Mallas/bola.jpg", 0),
-			"./Mallas/bola.jpg");  //*** Para Textura: esta es la ruta en donde se encuentra la textura
+			FreeImage_GetFileType(fileroute, 0),
+			fileroute);  //*** Para Textura: esta es la ruta en donde se encuentra la textura
 
 		FIBITMAP* pImage = FreeImage_ConvertTo32Bits(bitmap);
 		int nWidth = FreeImage_GetWidth(pImage);
@@ -67,6 +71,54 @@ public:
 		glEnable(GL_TEXTURE_2D);
 	}
 
+	//*** Para Textura: aqui adiciono un m�todo que abre la textura en JPG
+	void initialize_textures(void)
+	{
+		int w, h;
+		GLubyte* data = 0;
+		//data = glmReadPPM("soccer_ball_diffuse.ppm", &w, &h);
+		//std::cout << "Read soccer_ball_diffuse.ppm, width = " << w << ", height = " << h << std::endl;
+
+		//dib1 = loadImage("soccer_ball_diffuse.jpg"); //FreeImage
+
+		generateIdentifier(texid);
+		loadTexture("./Mallas/bola.jpg");
+	}
+
+	/**
+	* Método que genera la malla de acuerdo a los parámetros dados por el usuario.
+	*
+	* @param textureID: El identificador de la textura que tendrá la malla.
+	* @param model: La malla que se desea importar.
+	* @param x: Posición en x de la malla respecto al origen.
+	* @param y: Posición en y de la malla respecto al origen.
+	* @param z: Posición en z de la malla respecto al origen.
+	* @param rx: Rotación en x de la malla respecto a su centro.
+	* @param ry: Rotación en y de la malla respecto a su centro.
+	* @param rz: Rotación en z de la malla respecto a su centro.
+	* @param sx: Escalado en x de la malla respecto a su centro.
+	* @param sy: Escalado en y de la malla respecto a su centro.
+	* @param sz: Escalado en z de la malla respecto a su centro.
+	* @return void.
+	*/
+	void generateMesh(GLuint textureID, GLMmodel* model, GLfloat x = 0, GLfloat y = 0, GLfloat z = 0, GLfloat rx = 0, GLfloat ry = 0, GLfloat rz = 0, GLfloat sx = 1, GLfloat sy = 1, GLfloat sz = 1) {
+		glPushMatrix();
+		glTranslatef(x, y, z);
+		if (rx != 0) {
+			glRotatef(rx, 1, 0, 0);
+		}
+		if (ry != 0) {
+			glRotatef(ry, 0, 1, 0);
+		}
+		if (rz != 0) {
+			glRotatef(rz, 0, 0, 1);
+		}
+		glScalef(sx, sy, sz);
+		glBindTexture(GL_TEXTURE_2D, textureID);
+		glmDraw(model, GLM_SMOOTH | GLM_MATERIAL | GLM_TEXTURE);
+		glPopMatrix();
+	}
+
 
 	virtual void OnRender(void)
 	{
@@ -75,31 +127,14 @@ public:
       //timer010 = 0.09; //for screenshot!
 
       glPushMatrix();
-	  glRotatef(timer010 * 360, 0.5, 1.0f, 0.1f);
 
       if (shader) shader->begin();
-		  
-		  glPushMatrix();
-		  glTranslatef(-1.5f, 0.0f, 0.0f);
-		  glmDraw(objmodel_ptr, GLM_SMOOTH | GLM_MATERIAL);
-		  glPopMatrix();
 	      //glutSolidTeapot(1.0);
       if (shader) shader->end();
 
 	  //*** Para Textura: llamado al shader para objetos texturizados
 	  if (shader1) shader1->begin();
-
-		  glPushMatrix();
-		  glTranslatef(0.0f, 0.0f, 0.0f);
-		  glBindTexture(GL_TEXTURE_2D, texid);
-		  glmDraw(objmodel_ptr1, GLM_SMOOTH | GLM_MATERIAL | GLM_TEXTURE);
-		  glPopMatrix();
-
-		  glPushMatrix();
-		  glTranslatef(1.5f, 0.0f, 0.0f);
-		  glBindTexture(GL_TEXTURE_2D, texid);
-		  glmDraw(ulisesmodel_ptr, GLM_SMOOTH | GLM_MATERIAL | GLM_TEXTURE);
-		  glPopMatrix();
+		  generateMesh(texid, ulisesmodel_ptr);
 	  //glutSolidTeapot(1.0);
 	  if (shader1) shader1->end();
 
@@ -113,6 +148,28 @@ public:
 	}
 
 	virtual void OnIdle() {}
+
+	/**
+	* Método que inicializa la malla.
+	*
+	* @param model: La malla que se desea importar.
+	* @param fileroute: La ruta de acceso a la malla. Recordar que tiene que ser de tipo .obj.
+	* @return void.
+	*/
+	void initMesh(GLMmodel*& model, char* fileroute) {
+		model = NULL;
+
+		if (!model)
+		{
+			model = glmReadOBJ(fileroute);
+			if (!model)
+				exit(0);
+
+			glmUnitize(model);
+			glmFacetNormals(model);
+			glmVertexNormals(model, 90.0);
+		}
+	}
 
 	// When OnInit is called, a render context (in this case GLUT-Window) 
 	// is already available!
@@ -143,46 +200,8 @@ public:
       timer010 = 0.0f;
       bUp = true;
 
-	  //Abrir mallas
-	  objmodel_ptr = NULL;
-
-	  if (!objmodel_ptr)
-	  {
-		  objmodel_ptr = glmReadOBJ("./Mallas/Ulises.obj");
-		  if (!objmodel_ptr)
-			  exit(0);
-
-		  glmUnitize(objmodel_ptr);
-		  glmFacetNormals(objmodel_ptr);
-		  glmVertexNormals(objmodel_ptr, 90.0);
-	  }
-
 	  //Malla de Ulises.
-	  ulisesmodel_ptr = NULL;
-
-	  if (!ulisesmodel_ptr)
-	  {
-		  ulisesmodel_ptr = glmReadOBJ("./Mallas/Ulises_walking.obj");
-		  if (!ulisesmodel_ptr)
-			  exit(0);
-
-		  glmUnitize(ulisesmodel_ptr);
-		  glmFacetNormals(ulisesmodel_ptr);
-		  glmVertexNormals(ulisesmodel_ptr, 90.0);
-	  }
-	  //*** Para Textura: abrir malla de objeto a texturizar
-	  objmodel_ptr1 = NULL;
-
-	  if (!objmodel_ptr1)
-	  {
-		  objmodel_ptr1 = glmReadOBJ("./Mallas/bola.obj");
-		  if (!objmodel_ptr1)
-			  exit(0);
-
-		  glmUnitize(objmodel_ptr1);
-		  glmFacetNormals(objmodel_ptr1);
-		  glmVertexNormals(objmodel_ptr1, 90.0);
-	  }
+	  initMesh(ulisesmodel_ptr, "./Mallas/Ulises_walking.obj");
  
 	  //*** Para Textura: abrir archivo de textura
 	  initialize_textures();
