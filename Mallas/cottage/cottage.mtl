@@ -1,0 +1,374 @@
+# 
+# Wavefront material file
+# Converted by the DEEP Exploration  Deep Exploration 5 5.0.5.1846 Release
+# Right Hemisphere, LTD
+# http://www.righthemisphere.com/
+# 
+
+newmtl band
+Ka 0 0 0
+Kd 1 1 1
+Ks 0.4 0.4 0.4
+illum 2
+Ns 64
+map_Kd m1.jpg
+map_bump 
+bump 
+map_opacity 
+map_d 
+refl 
+map_kS 
+map_kA 
+map_Ns 
+
+newmtl eimerboden
+Ka 0 0 0
+Kd 1 1 1
+Ks 0.05 0.05 0.05
+illum 2
+Ns 5.65685
+map_Kd WoodRough0021_L90.jpg
+map_bump 
+bump 
+map_opacity 
+map_d 
+refl 
+map_kS 
+map_kA 
+map_Ns 
+
+newmtl henkelahlter
+Ka 0 0 0
+Kd 1 1 1
+Ks 0.4 0.4 0.4
+illum 2
+Ns 64
+map_Kd m1.jpg
+map_bump 
+bump 
+map_opacity 
+map_d 
+refl 
+map_kS 
+map_kA 
+map_Ns 
+
+newmtl henkel
+Ka 0 0 0
+Kd 1 1 1
+Ks 0.4 0.4 0.4
+illum 2
+Ns 64
+map_Kd m1.jpg
+map_bump 
+bump 
+map_opacity 
+map_d 
+refl 
+map_kS 
+map_kA 
+map_Ns 
+
+newmtl eimer
+Ka 0 0 0
+Kd 1 1 1
+Ks 0.04 0.04 0.04
+illum 2
+Ns 5.65685
+map_Kd WoodRough0021_L90.jpg
+map_bump 
+bump 
+map_opacity 
+map_d 
+refl 
+map_kS 
+map_kA 
+map_Ns 
+
+newmtl niete
+Ka 0 0 0
+Kd 1 1 1
+Ks 0.4 0.4 0.4
+illum 2
+Ns 64
+map_Kd m1.jpg
+map_bump 
+bump 
+map_opacity 
+map_d 
+refl 
+map_kS 
+map_kA 
+map_Ns 
+
+newmtl nagel
+Ka 0 0 0
+Kd 1 1 1
+Ks 0.4 0.4 0.4
+illum 2
+Ns 64
+map_Kd m1.jpg
+map_bump 
+bump 
+map_opacity 
+map_d 
+refl 
+map_kS 
+map_kA 
+map_Ns 
+
+newmtl Explorer_Default
+Ka 0.117647 0.117647 0.117647
+Kd 0.752941 0.752941 0.752941
+Ks 0.752941 0.752941 0.752941
+illum 2
+Ns 8
+map_Kd 
+map_bump 
+bump 
+map_opacity 
+map_d 
+refl 
+map_kS 
+map_kA 
+map_Ns 
+
+newmtl stones
+Ka 0 0 0
+Kd 1 1 1
+Ks 1 1 1
+illum 2
+Ns 9.18959
+map_Kd IMG_0367.jpg
+map_bump IMG_0367A.jpg
+bump IMG_0367A.jpg
+map_opacity 
+map_d 
+refl 
+map_kS IMG_0367A.jpg
+map_kA 
+map_Ns 
+
+newmtl wall
+Ka 0 0 0
+Kd 0.165647 0.165647 0.165647
+Ks 0.0476863 0.0476863 0.0476863
+illum 2
+Ns 14.9285
+map_Kd 
+map_bump 
+bump 
+map_opacity 
+map_d 
+refl 
+map_kS 
+map_kA 
+map_Ns 
+
+newmtl wheel2
+Ka 0 0 0
+Kd 1 1 1
+Ks 0 0 0
+illum 2
+Ns 8
+map_Kd IMG_0367.jpg
+map_bump 
+bump 
+map_opacity 
+map_d 
+refl 
+map_kS 
+map_kA 
+map_Ns 
+
+newmtl door2
+Ka 0 0 0
+Kd 1 1 1
+Ks 0 0 0
+illum 2
+Ns 8
+map_Kd door12+.jpg
+map_bump door12+b.jpg
+bump door12+b.jpg
+map_opacity 
+map_d 
+refl 
+map_kS 
+map_kA 
+map_Ns 
+
+newmtl door
+Ka 0 0 0
+Kd 1 1 1
+Ks 0 0 0
+illum 2
+Ns 8
+map_Kd door12+.jpg
+map_bump door12+b.jpg
+bump door12+b.jpg
+map_opacity 
+map_d 
+refl 
+map_kS 
+map_kA 
+map_Ns 
+
+newmtl door_met
+Ka 0 0 0
+Kd 1 1 1
+Ks 1 1 1
+illum 2
+Ns 18.3792
+map_Kd door12+.jpg
+map_bump door12+b.jpg
+bump door12+b.jpg
+map_opacity 
+map_d 
+refl door12+b.jpg
+map_kS door12+b.jpg
+map_kA 
+map_Ns door12+b.jpg
+
+newmtl window1
+Ka 0 0 0
+Kd 1 1 1
+Ks 0 0 0
+illum 2
+Ns 8
+map_Kd door12+.jpg
+map_bump door12+.jpg
+bump door12+.jpg
+map_opacity 
+map_d 
+refl 
+map_kS 
+map_kA 
+map_Ns 
+
+newmtl wheel3
+Ka 0 0 0
+Kd 1 1 1
+Ks 0 0 0
+illum 2
+Ns 8
+map_Kd wheelb.jpg
+map_bump 
+bump 
+map_opacity 
+map_d 
+refl 
+map_kS 
+map_kA 
+map_Ns 
+
+newmtl wheel
+Ka 0 0 0
+Kd 1 1 1
+Ks 0.0392157 0.0392157 0.0392157
+illum 2
+Ns 5.65685
+map_Kd wheelb.jpg
+map_bump 
+bump 
+map_opacity 
+map_d 
+refl 
+map_kS 
+map_kA 
+map_Ns 
+
+newmtl wheel_met
+Ka 0 0 0
+Kd 1 1 1
+Ks 0.258824 0.258824 0.258824
+illum 2
+Ns 39.3966
+map_Kd m1.jpg
+map_bump m1.jpg
+bump m1.jpg
+map_opacity 
+map_d 
+refl 
+map_kS 
+map_kA 
+map_Ns 
+
+newmtl roof2
+Ka 0 0 0
+Kd 1 1 1
+Ks 0 0 0
+illum 2
+Ns 9.18959
+map_Kd stroh_4d.jpg
+map_bump 
+bump 
+map_opacity 
+map_d 
+refl 
+map_kS 
+map_kA 
+map_Ns 
+
+newmtl roof
+Ka 0 0 0
+Kd 1 1 1
+Ks 0 0 0
+illum 2
+Ns 9.18959
+map_Kd stroh_4d.jpg
+map_bump stroh_4d.jpg
+bump stroh_4d.jpg
+map_opacity 
+map_d 
+refl 
+map_kS 
+map_kA 
+map_Ns 
+
+newmtl roof_
+Ka 0 0 0
+Kd 1 1 1
+Ks 0 0 0
+illum 2
+Ns 5.65685
+map_Kd stroh_4e.jpg
+map_bump stroh_4d.jpg
+bump stroh_4d.jpg
+map_opacity strohalp.jpg
+map_d strohalp.jpg
+refl 
+map_kS 
+map_kA 
+map_Ns 
+
+newmtl gruenzeug
+Ka 0 0 0
+Kd 1 1 1
+Ks 0 0 0
+illum 2
+Ns 8
+map_Kd leafs.jpg
+map_bump 
+bump 
+map_opacity 
+map_d 
+refl 
+map_kS 
+map_kA 
+map_Ns 
+
+newmtl bretter
+Ka 0 0 0
+Kd 1 1 1
+Ks 0.0705882 0.0705882 0.0705882
+illum 2
+Ns 7.46426
+map_Kd WoodRough0021_L90.jpg
+map_bump WoodRough0021_L90.jpg
+bump WoodRough0021_L90.jpg
+map_opacity 
+map_d 
+refl 
+map_kS 
+map_kA 
+map_Ns 
