@@ -1,0 +1,1 @@
+Conversión medidas blender a OpenGL: x / 0.037
