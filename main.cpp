@@ -26,10 +26,9 @@ protected:
    float timer010;  // timer counting 0->1->0
    bool bUp;        // flag if counting up or down.
    GLMmodel* ulisesmodel_ptr; // Malla de Ulises.
-   GLuint texid; //*** Para Textura: variable que almacena el identificador de textura
-   std::vector<GLuint> cottagetexid;
+   GLuint ulisestexid; //*** Para Textura: variable que almacena el identificador de textura
+   GLuint cottagetexid;
    GLMmodel* cottage1model_ptr;
-
 
 public:
 	myWindow(){}
@@ -44,26 +43,6 @@ public:
 		glTexEnvi(GL_TEXTURE_2D, GL_TEXTURE_ENV_MODE, GL_MODULATE);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-	}
-
-	/*
-	* Método encargado de generar un vector de identificadores de texturas.
-	* @param texturesIDs: El apuntador hacia el vector de identificadores de texturas.
-	* @return void.
-	*/
-	void generateIdentifiers(std::vector<GLuint>& texturesIDs, int amount) {
-		for (int i = 0; i < amount; i++) {
-			GLuint textureID; // Se crea un identificador de textura.
-			// Se realiza el procedimiento de generación del identificador.
-			glGenTextures(1, &textureID);
-			glBindTexture(GL_TEXTURE_2D, textureID);
-			glTexEnvi(GL_TEXTURE_2D, GL_TEXTURE_ENV_MODE, GL_MODULATE);
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-
-			// Se agrega el identificador al vector.
-			texturesIDs.push_back(textureID);
-		}
 	}
 
 	/**
@@ -89,30 +68,6 @@ public:
 		FreeImage_Unload(pImage);
 	}
 
-	/**
-	* Método encargado de cargar un conjunto de Texturas con formato de imagen.
-	*
-	* @param fileroutes: El vector de rutas de acceso a las imagenes.
-	* @return void.
-	*/
-	void loadTextures(std::vector<const char*> fileroutes) {
-		for (size_t i = 0; i < fileroutes.size(); i++) {
-			// Loading JPG file
-			FIBITMAP* bitmap = FreeImage_Load(
-				FreeImage_GetFileType(fileroutes[i], 0),
-				fileroutes[i]);  //*** Para Textura: esta es la ruta en donde se encuentra la textura
-
-			FIBITMAP* pImage = FreeImage_ConvertTo32Bits(bitmap);
-			int nWidth = FreeImage_GetWidth(pImage);
-			int nHeight = FreeImage_GetHeight(pImage);
-
-			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, nWidth, nHeight,
-				0, GL_BGRA, GL_UNSIGNED_BYTE, (void*)FreeImage_GetBits(pImage));
-
-			FreeImage_Unload(pImage);
-		}
-	}
-
 	//*** Para Textura: aqui adiciono un m�todo que abre la textura en JPG
 	void initialize_textures(void)
 	{
@@ -124,19 +79,14 @@ public:
 		//dib1 = loadImage("soccer_ball_diffuse.jpg"); //FreeImage
 		
 		// Todas las texturas correspondientes al modelo cottage.
-		std::vector<const char*> cottage_textures = {"./Mallas/cottage/door12+.jpg", "./Mallas/cottage/door12+b.jpg",
-		"./Mallas/cottage/IMG_0367.jpg", "./Mallas/cottage/IMG_0367A.jpg", "./Mallas/cottage/leafs.jpg",
-		"./Mallas/cottage/m1.jpg", "./Mallas/cottage/stroh_4d.jpg", "./Mallas/cottage/stroh_4e.jpg",
-		"./Mallas/cottage/strohalp.jpg", "./Mallas/cottage/wheelb.jpg",
-		"./Mallas/cottage/WoodRough0021_L90.jpg" };
 
-		// Bola Texture.
-		generateIdentifier(texid);
-		loadTexture("./Mallas/bola.jpg");
+		// Ulises Texture.
+		generateIdentifier(ulisestexid);
+		loadTexture("./Mallas/ulises.jpg"); // FIXME: La textura de Ulises no carga correctamente.
 
 		// Cottage Texture
-		generateIdentifiers(cottagetexid, 11);
-		loadTextures(cottage_textures);
+		generateIdentifier(cottagetexid);
+		loadTexture("./Mallas/cottage.jpg");
 
 		glEnable(GL_TEXTURE_2D);
 	}
@@ -175,41 +125,7 @@ public:
 		glPopMatrix();
 	}
 
-	/**
-	* Método que genera la malla de acuerdo a los parámetros dados por el usuario, en caso de utilizar múltiples texturas.
-	*
-	* @param texturesIDs: El vector con los identificadores de texturas que tendrá la malla.
-	* @param model: La malla que se desea importar.
-	* @param x: Posición en x de la malla respecto al origen.
-	* @param y: Posición en y de la malla respecto al origen.
-	* @param z: Posición en z de la malla respecto al origen.
-	* @param rx: Rotación en x de la malla respecto a su centro.
-	* @param ry: Rotación en y de la malla respecto a su centro.
-	* @param rz: Rotación en z de la malla respecto a su centro.
-	* @param sx: Escalado en x de la malla respecto a su centro.
-	* @param sy: Escalado en y de la malla respecto a su centro.
-	* @param sz: Escalado en z de la malla respecto a su centro.
-	* @return void.
-	*/
-	void generateMeshMult(std::vector<GLuint> texturesIDs, GLMmodel* model, GLfloat x = 0, GLfloat y = 0, GLfloat z = 0, GLfloat rx = 0, GLfloat ry = 0, GLfloat rz = 0, GLfloat sx = 1, GLfloat sy = 1, GLfloat sz = 1) {
-		glPushMatrix();
-		glTranslatef(x, y, z);
-		if (rx != 0) {
-			glRotatef(rx, 1, 0, 0);
-		}
-		if (ry != 0) {
-			glRotatef(ry, 0, 1, 0);
-		}
-		if (rz != 0) {
-			glRotatef(rz, 0, 0, 1);
-		}
-		glScalef(sx, sy, sz);
-		for (size_t i = 0; i < texturesIDs.size(); i++) {
-			glBindTexture(GL_TEXTURE_2D, texturesIDs[i]);
-			glmDraw(model, GLM_SMOOTH | GLM_MATERIAL | GLM_TEXTURE);
-		}
-		glPopMatrix();
-	}
+	
 
 	virtual void OnRender(void)
 	{
@@ -218,6 +134,7 @@ public:
       //timer010 = 0.09; //for screenshot!
 
       glPushMatrix();
+	  glTranslatef(-15, -15.5, -23.5); // FIXME: Busca el modelo con la cámara para que se vea centrado.
 
       if (shader) shader->begin();
 	      //glutSolidTeapot(1.0);
@@ -225,9 +142,9 @@ public:
 
 	  //*** Para Textura: llamado al shader para objetos texturizados
 	  if (shader1) shader1->begin();
-		  generateMesh(texid, ulisesmodel_ptr);
+		  generateMesh(ulisestexid, ulisesmodel_ptr, -20.57494, 15.123, -0.30686, 0, 0, 0, 0.00759, 0.00759, 0.00759);
 		  // Ejemplo de modelo con multiples texturas.
-		  generateMeshMult(cottagetexid, cottage1model_ptr, 2, 0, 0, -90);
+		  generateMesh(cottagetexid, cottage1model_ptr, -9.30081, 15.93683, -24.16032, -90, 0, 92.121);
 	  //glutSolidTeapot(1.0);
 	  if (shader1) shader1->end();
 
@@ -297,7 +214,7 @@ public:
 	  initMesh(ulisesmodel_ptr, "./Mallas/Ulises_walking.obj");
 
 	  // Malla de Cottage1.
-	  initMesh(cottage1model_ptr, "./Mallas/cottage/cottage.obj");
+	  initMesh(cottage1model_ptr, "./Mallas/cottage.obj");
  
 	  //*** Para Textura: abrir archivo de textura
 	  initialize_textures();
