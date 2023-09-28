@@ -25,10 +25,37 @@ protected:
    clock_t time0,time1;
    float timer010;  // timer counting 0->1->0
    bool bUp;        // flag if counting up or down.
+   // Mallas.
    GLMmodel* ulisesmodel_ptr; // Malla de Ulises.
+   GLMmodel* cottagemodel_ptr;
+   GLfloat cottagetranslations[2][3] = { {0.05070, 15.93683, 8.19562},{-9.30081,15.93683,-24.16032} };
+   GLfloat cottagerotations[2][3] = { {90,180.51,0},{90,92.121,-90} };
+   GLMmodel* treemodel_ptr;
+   GLfloat treetranslations[7][3] = { {-10.88767, 19.77489, 26.57686},{4.31775,20.51921,26.57686},{-24.58316, 19.77489,-16.29935},{-16.92491,19.77489,-22.66818},{1.86078,20.02643,-2.45683},{6.17059,20.02643,-9.12108},{4.31775,20.02643,-23.53570} };
+   GLMmodel* boatmodel_ptr;
+   GLMmodel* wheatmodel_ptr;
+   GLfloat wheattranslations[5][3] = { {0,15.20216,0},{4.03983,15.20216,0},{8.066,15.20216,0},{4.12278,15.82786,-18.63137},{8.066,15.82786,-18.63137} };
+   GLMmodel* portmodel_ptr;
+   GLfloat porttranslations[2][3] = { {-24.61537,15.17132,-3.66232},{-20.62189,15.17132,-5.14681} };
+   // No se pudo automatizar los ciclopes ya que todos tienen una armadura distina
+   GLMmodel* cyclopmodel_ptr;
+   GLMmodel* cyclopidlemodel_ptr;
+   GLMmodel* cyclopsitmodel_prt;
+   GLMmodel* cyclopwalkingmodel_ptr;
+
+   GLMmodel* terrainmodel_ptr;
+   GLMmodel* oceanmodel_ptr;
+   // Identificadores de texturas.
    GLuint ulisestexid; //*** Para Textura: variable que almacena el identificador de textura
    GLuint cottagetexid;
-   GLMmodel* cottage1model_ptr;
+   GLuint treetexid;
+   GLuint boattexid;
+   GLuint wheattexid;
+   GLuint porttexid;
+   GLuint cycloptexid;
+   GLuint terraintexid;
+   GLuint oceantexid;
+   
 
 public:
 	myWindow(){}
@@ -84,9 +111,37 @@ public:
 		generateIdentifier(ulisestexid);
 		loadTexture("./Mallas/ulises.jpg"); // FIXME: La textura de Ulises no carga correctamente.
 
-		// Cottage Texture
+		// Cottage Texture.
 		generateIdentifier(cottagetexid);
 		loadTexture("./Mallas/cottage.jpg");
+
+		// Tree Texture.
+		generateIdentifier(treetexid);
+		loadTexture("./Mallas/tree.jpg");
+
+		// Boat Texture.
+		generateIdentifier(boattexid);
+		loadTexture("./Mallas/boat.jpg");
+
+		// Wheat Texture.
+		generateIdentifier(wheattexid);
+		loadTexture("./Mallas/FieldOfWheat_BaseColor.png");
+
+		// Port Texture.
+		generateIdentifier(porttexid);
+		loadTexture("./Mallas/port.jpg");
+
+		// Cyclop Texture.
+		generateIdentifier(cycloptexid);
+		loadTexture("./Mallas/cyclop.png");
+
+		// Terrain Texture.
+		generateIdentifier(terraintexid);
+		loadTexture("./Mallas/terrain.jpg");
+
+		// Ocean Texture.
+		generateIdentifier(oceantexid);
+		loadTexture("./Mallas/ocean.jpg");
 
 		glEnable(GL_TEXTURE_2D);
 	}
@@ -134,7 +189,7 @@ public:
       //timer010 = 0.09; //for screenshot!
 
       glPushMatrix();
-	  glTranslatef(-15, -15.5, -23.5); // FIXME: Busca el modelo con la cámara para que se vea centrado.
+	  glTranslatef(0, -15.5, -23.5); // FIXME: Busca el modelo con la cámara para que se vea centrado.
 
       if (shader) shader->begin();
 	      //glutSolidTeapot(1.0);
@@ -142,9 +197,45 @@ public:
 
 	  //*** Para Textura: llamado al shader para objetos texturizados
 	  if (shader1) shader1->begin();
-		  generateMesh(ulisestexid, ulisesmodel_ptr, -20.57494, 15.123, -0.30686, 0, 0, 0, 0.00759, 0.00759, 0.00759);
-		  // Ejemplo de modelo con multiples texturas.
-		  generateMesh(cottagetexid, cottage1model_ptr, -9.30081, 15.93683, -24.16032, -90, 0, 92.121);
+			// Ulises Mesh
+		  generateMesh(ulisestexid, ulisesmodel_ptr, -20.57494, 15.123, -0.30686, 0, 0, 0);
+		  // Cottage Mesh
+		  //generateMesh(cottagetexid, cottagemodel_ptr, -9.30081, 15.93683, -24.16032, -90, 0, 92.121);
+		  for (int i = 0; i < 2; i++) {
+			  generateMesh(cottagetexid, cottagemodel_ptr, cottagetranslations[i][0], cottagetranslations[i][1], cottagetranslations[i][2], cottagerotations[i][0], cottagerotations[i][1], cottagerotations[i][2]);
+		  }
+
+		  // Tree Mesh.
+		  for (int i = 0; i < 7; i++) {
+			  generateMesh(treetexid, treemodel_ptr, treetranslations[i][0], treetranslations[i][1], treetranslations[i][2]);
+		  }
+
+		  // Boat Mesh.
+		  generateMesh(boattexid, boatmodel_ptr, -19.02554, 15.45340, 0, 90);
+
+		  // Wheat Mesh.
+		  for (int i = 0; i < 5; i++) {
+			  generateMesh(wheattexid, wheatmodel_ptr, wheattranslations[i][0], wheattranslations[i][1], wheattranslations[i][2]);
+		  }
+
+		  // Port Mesh.
+		  for (int i = 0; i < 2; i++) {
+			  generateMesh(porttexid, portmodel_ptr, porttranslations[i][0], porttranslations[i][1], porttranslations[i][2]);
+		  }
+
+		  // All Cyclop Meshs.
+		  generateMesh(cycloptexid, cyclopmodel_ptr, -6.72378, 17.93378, 13.15297, 41.969, -86.868, 15.367);
+		  generateMesh(cycloptexid, cyclopmodel_ptr, -22.44327, 18.23278, -23.40291, 41.969, 2.0291, 15.367);
+		  generateMesh(cycloptexid, cyclopsitmodel_prt, 0.08559, 17.70918, 3.90594, 41.969, -89.179, 15.367);
+		  generateMesh(cycloptexid, cyclopidlemodel_ptr, -14.41891, 17.58567, -10.2762, 41.969, -195.56, 15.367);
+		  generateMesh(cycloptexid, cyclopwalkingmodel_ptr, -12.50621, 17.38351, -18.44918, 41.969, 78.368, 15.367);
+		  generateMesh(cycloptexid, cyclopwalkingmodel_ptr, -7.35972, 17.60740, -14.82583, 41.969, -63.194, 15.367);
+		  
+		  // Terrain Mesh
+		  generateMesh(terraintexid, terrainmodel_ptr, 1.86843, 14.63394, 0.75324);
+
+		  // Ocean Mesh.
+		  generateMesh(oceantexid, oceanmodel_ptr, 1.86843, 14.60767, 0.75324);
 	  //glutSolidTeapot(1.0);
 	  if (shader1) shader1->end();
 
@@ -210,12 +301,35 @@ public:
       timer010 = 0.0f;
       bUp = true;
 
-	  //Malla de Ulises.
+	  // Ulises Mesh.
 	  initMesh(ulisesmodel_ptr, "./Mallas/Ulises_walking.obj");
 
-	  // Malla de Cottage1.
-	  initMesh(cottage1model_ptr, "./Mallas/cottage.obj");
- 
+	  // Cottage1 Mesh.
+	  initMesh(cottagemodel_ptr, "./Mallas/cottage.obj");
+
+	  // Tree Mesh.
+	  initMesh(treemodel_ptr, "./Mallas/tree.obj");
+
+	  // Boat Mesh.
+	  initMesh(boatmodel_ptr, "./Mallas/boat.obj");
+
+	  // Wheat Mesh.
+	  initMesh(wheatmodel_ptr, "./Mallas/FieldOfWheat.obj");
+
+	  // Port Mesh.
+	  initMesh(portmodel_ptr, "./Mallas/port.obj");
+
+	  // All cyclops Mesh.
+	  initMesh(cyclopmodel_ptr, "./Mallas/cyclop.obj");
+	  initMesh(cyclopsitmodel_prt, "./Mallas/cyclop_sit.obj");
+	  initMesh(cyclopidlemodel_ptr, "./Mallas/cyclop_idle.obj");
+	  initMesh(cyclopwalkingmodel_ptr, "./Mallas/cyclop_walking.obj");
+
+	  // Terrain Mesh.
+	  initMesh(terrainmodel_ptr, "./Mallas/terrain.obj");
+
+	  // Ocean Mesh.
+	  initMesh(oceanmodel_ptr, "./Mallas/ocean.obj");
 	  //*** Para Textura: abrir archivo de textura
 	  initialize_textures();
       DemoLight();
