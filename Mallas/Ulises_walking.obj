@@ -1,6 +1,6 @@
 # Blender v3.6.1 OBJ File: 'Ulises_walking.blend'
 # www.blender.org
-mtllib Ulises_walking.mtl
+# mtllib Ulises_walking.mtl
 o Cubo.002
 v 0.000602 2.577132 -0.081486
 v -0.019484 2.358296 -0.099554

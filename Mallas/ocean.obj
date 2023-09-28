@@ -1,0 +1,17 @@
+# Blender v3.6.1 OBJ File: 'Terreno.blend'
+# www.blender.org
+mtllib ocean.mtl
+o Landscape_plane
+v -1.025493 0.556891 1.060736
+v -1.025493 0.556891 -1.116476
+v 1.163757 0.556891 1.060736
+v 1.163757 0.556891 -1.116476
+vt 0.583202 0.416798
+vt 0.583202 0.583202
+vt 0.416798 0.583202
+vt 0.416798 0.416798
+vn 0.0000 1.0000 0.0000
+g Landscape_plane_Landscape_plane_Procedural_Water_Surface
+usemtl Procedural_Water_Surface
+s 1
+f 3/1/1 4/2/1 2/3/1 1/4/1
