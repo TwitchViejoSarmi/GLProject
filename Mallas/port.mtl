@@ -1,18 +1,20 @@
-# Blender MTL File: 'Terreno.blend'
-# Material Count: 2
+# Blender MTL File: 'port.blend'
+# Material Count: 13
 
-newmtl None.001
-Ns 0.000000
+newmtl Material
+Ns 359.999993
 Ka 1.000000 1.000000 1.000000
 Kd 0.800000 0.800000 0.800000
-Ks 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
 Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 2
-map_Kd C:\\Users\\juane\\OneDrive\\Documentos\\Compu Grafica\\Modelos\\dock\\C:\\Users\\EEGTOYO\\Desktop\\texturedMetal.jpg
+map_Kd TexturesCom_WoodPlanksClean0063_2_S.jpg
+map_Ks wood2 spec.png
+map_Ns wood2 rough.png
 
-newmtl Wood
+newmtl Material.001
 Ns 250.000000
 Ka 1.000000 1.000000 1.000000
 Kd 0.800000 0.800000 0.800000
@@ -21,5 +23,148 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 2
-map_Kd D:\\WORK\\BlenderFiles\\Materials\\NEW\\Wood063_2K-JPG\\Wood063_2K_Color.jpg
-map_Ns D:\\WORK\\BlenderFiles\\Materials\\NEW\\Wood063_2K-JPG\\Wood063_2K_Roughness.jpg
+map_Ks tree spec.png
+map_Ns tree rough.png
+
+newmtl Material.002
+Ns 250.000000
+Ka 0.698182 0.698182 0.698182
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 3
+map_Kd metal texture 500.jpg
+map_Ks metal spec.png
+map_Ns metal rough.png
+
+newmtl Material.003
+Ns 250.000000
+Ka 0.734545 0.734545 0.734545
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 3
+map_Kd metal texture 500.jpg
+map_Ks metal spec.png
+map_Ns metal rough.png
+
+newmtl Material.004
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd rope500.jpg
+map_Ks rope spec.png
+map_Ns rope rough.png
+
+newmtl Material.005
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd rope500.jpg
+map_Ks rope spec.png
+map_Ns rope rough.png
+
+newmtl Material.006
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd rope500.jpg
+map_Ks rope spec.png
+map_Ns rope rough.png
+
+newmtl Material.007
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd rope500.jpg
+map_Ks rope spec.png
+map_Ns rope rough.png
+
+newmtl Material.008
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd rope500.jpg
+map_Ks rope spec.png
+map_Ns rope rough.png
+
+newmtl Material.009
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd rope500.jpg
+map_Ks rope spec.png
+map_Ns rope rough.png
+
+newmtl Material.010
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd rope500.jpg
+map_Ks rope spec.png
+map_Ns rope rough.png
+
+newmtl Material.011
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd rope500.jpg
+map_Ks rope spec.png
+map_Ns rope rough.png
+
+newmtl Material.012
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd TexturesCom_WoodPlanksClean0063_2_S.jpg
+map_Ks wood2 spec.png
+map_Ns wood2 rough.png
