@@ -28,15 +28,15 @@ protected:
    // Mallas.
    GLMmodel* ulisesmodel_ptr; // Malla de Ulises.
    GLMmodel* cottagemodel_ptr;
-   GLfloat cottagetranslations[2][3] = { {0.05070, 15.93683, 8.19562},{-9.30081,15.93683,-24.16032} };
-   GLfloat cottagerotations[2][3] = { {90,180.51,0},{90,92.121,-90} };
+   GLfloat cottagetranslations[2][3] = { {0.001876, 0.589663, -0.303238},{-0.34413,0.589663,0.893932} };
+   GLfloat cottagerotations[2][3] = { {0,90,0},{0,0,0} };
    GLMmodel* treemodel_ptr;
-   GLfloat treetranslations[7][3] = { {-10.88767, 19.77489, 26.57686},{4.31775,20.51921,26.57686},{-24.58316, 19.77489,-16.29935},{-16.92491,19.77489,-22.66818},{1.86078,20.02643,-2.45683},{6.17059,20.02643,-9.12108},{4.31775,20.02643,-23.53570} };
+   GLfloat treetranslations[7][3] = { {-0.402844, 0.531671, -0.983344},{0.159757, 0.559211, -0.983344},{-0.909577, 0.531671, 0.603076},{-0.626222,0.531671,0.838723},{0.068849,0.540978,0.090903},{0.228312,0.540978,0.33748},{0.159757,0.540978,0.870821} };
    GLMmodel* boatmodel_ptr;
    GLMmodel* wheatmodel_ptr;
-   GLfloat wheattranslations[5][3] = { {0,15.20216,0},{4.03983,15.20216,0},{8.066,15.20216,0},{4.12278,15.82786,-18.63137},{8.066,15.82786,-18.63137} };
+   GLfloat wheattranslations[5][3] = { {0,0.56248,0},{0.149474,0.56248,0},{0.298442,0.56248,0},{0.152543,0.585631,0.689361},{0.298442,0.585631,0.689361} };
    GLMmodel* portmodel_ptr;
-   GLfloat porttranslations[2][3] = { {-24.61537,15.17132,-3.66232},{-20.62189,15.17132,-5.14681} };
+   GLfloat porttranslations[2][3] = { {-0.710769,0.661339,0.26},{-0.56301,0.661339,0.24} }; // TODO:Ajustar los puertos para que queden bien alineados.
    // No se pudo automatizar los ciclopes ya que todos tienen una armadura distina
    GLMmodel* cyclopmodel_ptr;
    GLMmodel* cyclopidlemodel_ptr;
@@ -109,7 +109,7 @@ public:
 
 		// Ulises Texture.
 		generateIdentifier(ulisestexid);
-		loadTexture("./Mallas/ulises.jpg"); // FIXME: La textura de Ulises no carga correctamente.
+		loadTexture("./Mallas/ulises.jpg");
 
 		// Cottage Texture.
 		generateIdentifier(cottagetexid);
@@ -133,7 +133,7 @@ public:
 
 		// Cyclop Texture.
 		generateIdentifier(cycloptexid);
-		loadTexture("./Mallas/cyclop.png");
+		loadTexture("./Mallas/cyclop.jpg");
 
 		// Terrain Texture.
 		generateIdentifier(terraintexid);
@@ -189,7 +189,8 @@ public:
       //timer010 = 0.09; //for screenshot!
 
       glPushMatrix();
-	  glTranslatef(0, -15.5, -23.5); // FIXME: Busca el modelo con la cámara para que se vea centrado.
+	  glTranslatef(0, -0.52, -1);
+	  glRotatef(45, 1, 0, 0);
 
       if (shader) shader->begin();
 	      //glutSolidTeapot(1.0);
@@ -197,12 +198,10 @@ public:
 
 	  //*** Para Textura: llamado al shader para objetos texturizados
 	  if (shader1) shader1->begin();
-			// Ulises Mesh
-		  generateMesh(ulisestexid, ulisesmodel_ptr, -20.57494, 15.123, -0.30686, 0, 0, 0);
+		  generateMesh(ulisestexid, ulisesmodel_ptr, -0.76127, 0.559551, -0.01135382, 0, 0, 0, 0.050, 0.050, 0.050);
 		  // Cottage Mesh
-		  //generateMesh(cottagetexid, cottagemodel_ptr, -9.30081, 15.93683, -24.16032, -90, 0, 92.121);
 		  for (int i = 0; i < 2; i++) {
-			  generateMesh(cottagetexid, cottagemodel_ptr, cottagetranslations[i][0], cottagetranslations[i][1], cottagetranslations[i][2], cottagerotations[i][0], cottagerotations[i][1], cottagerotations[i][2]);
+			  generateMesh(cottagetexid, cottagemodel_ptr, cottagetranslations[i][0], cottagetranslations[i][1], cottagetranslations[i][2], cottagerotations[i][0], cottagerotations[i][1], cottagerotations[i][2], 1, 1, 1);
 		  }
 
 		  // Tree Mesh.
@@ -211,31 +210,31 @@ public:
 		  }
 
 		  // Boat Mesh.
-		  generateMesh(boattexid, boatmodel_ptr, -19.02554, 15.45340, 0, 90);
+		  generateMesh(boattexid, boatmodel_ptr, -0.703945, 0.571776, 0);
 
 		  // Wheat Mesh.
 		  for (int i = 0; i < 5; i++) {
-			  generateMesh(wheattexid, wheatmodel_ptr, wheattranslations[i][0], wheattranslations[i][1], wheattranslations[i][2]);
+			  generateMesh(wheattexid, wheatmodel_ptr, wheattranslations[i][0], wheattranslations[i][1], wheattranslations[i][2], 0, 0, 0, 0.1, 0.1, 0.1);
 		  }
 
 		  // Port Mesh.
 		  for (int i = 0; i < 2; i++) {
-			  generateMesh(porttexid, portmodel_ptr, porttranslations[i][0], porttranslations[i][1], porttranslations[i][2]);
+			  generateMesh(porttexid, portmodel_ptr, porttranslations[i][0], porttranslations[i][1], porttranslations[i][2], 0,0,0, 0.1, 0.1, 0.1);
 		  }
-
 		  // All Cyclop Meshs.
-		  generateMesh(cycloptexid, cyclopmodel_ptr, -6.72378, 17.93378, 13.15297, 41.969, -86.868, 15.367);
-		  generateMesh(cycloptexid, cyclopmodel_ptr, -22.44327, 18.23278, -23.40291, 41.969, 2.0291, 15.367);
-		  generateMesh(cycloptexid, cyclopsitmodel_prt, 0.08559, 17.70918, 3.90594, 41.969, -89.179, 15.367);
-		  generateMesh(cycloptexid, cyclopidlemodel_ptr, -14.41891, 17.58567, -10.2762, 41.969, -195.56, 15.367);
-		  generateMesh(cycloptexid, cyclopwalkingmodel_ptr, -12.50621, 17.38351, -18.44918, 41.969, 78.368, 15.367);
-		  generateMesh(cycloptexid, cyclopwalkingmodel_ptr, -7.35972, 17.60740, -14.82583, 41.969, -63.194, 15.367);
-		  
+		  generateMesh(cycloptexid, cyclopmodel_ptr, -0.24878, 0.563547, -0.486664, 0, -86.868, 0, 0.100, 0.100, 0.100);
+		  generateMesh(cycloptexid, cyclopmodel_ptr, -0.830401, 0.574613, 0.865908, 0, 2.0291, 0, 0.100, 0.100, 0.100);
+		  generateMesh(cycloptexid, cyclopsitmodel_prt, 0.003167, 0.555244, -0.144517, 0, -89.179, 0, 0.100, 0.100, 0.100); // TODO: Encontrar esta malla que anda desaparecida.
+		  generateMesh(cycloptexid, cyclopidlemodel_ptr, -0.533495, 0.550675, 0.380219, 0, -195.56, 0, 0.200, 0.200, 0.200);
+		  generateMesh(cycloptexid, cyclopwalkingmodel_ptr, -0.46273, 0.543189, 0.682623, 0, 78.368, 0, 0.100, 0.100, 0.100);
+		  generateMesh(cycloptexid, cyclopwalkingmodel_ptr, -0.272312, 0.551474, 0.548556, 0, -63.194, 0, 0.100, 0.100, 0.100);
+
 		  // Terrain Mesh
-		  generateMesh(terraintexid, terrainmodel_ptr, 1.86843, 14.63394, 0.75324);
+		  generateMesh(terraintexid, terrainmodel_ptr, 0.069132, 0.541456, 0.02787);
 
 		  // Ocean Mesh.
-		  generateMesh(oceantexid, oceanmodel_ptr, 1.86843, 14.60767, 0.75324);
+		  generateMesh(oceantexid, oceanmodel_ptr, 0.069132, 0.448000, 0.02787);
+
 	  //glutSolidTeapot(1.0);
 	  if (shader1) shader1->end();
 
