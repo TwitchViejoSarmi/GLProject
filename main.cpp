@@ -36,11 +36,11 @@ protected:
    GLMmodel* wheatmodel_ptr;
    GLfloat wheattranslations[5][3] = { {0,0.56248,0},{0.149474,0.56248,0},{0.298442,0.56248,0},{0.152543,0.585631,0.689361},{0.298442,0.585631,0.689361} };
    GLMmodel* portmodel_ptr;
-   GLfloat porttranslations[2][3] = { {-0.710769,0.661339,0.26},{-0.56301,0.661339,0.24} }; // TODO:Ajustar los puertos para que queden bien alineados.
+   GLfloat porttranslations[2][3] = { {-0.730769,0.488000,0.14},{-0.58301,0.488000,0.16} };
    // No se pudo automatizar los ciclopes ya que todos tienen una armadura distina
    GLMmodel* cyclopmodel_ptr;
    GLMmodel* cyclopidlemodel_ptr;
-   GLMmodel* cyclopsitmodel_prt;
+   GLMmodel* cyclopsitmodel_ptr;
    GLMmodel* cyclopwalkingmodel_ptr;
 
    GLMmodel* terrainmodel_ptr;
@@ -190,7 +190,7 @@ public:
 
       glPushMatrix();
 	  glTranslatef(0, -0.52, -1);
-	  glRotatef(45, 1, 0, 0);
+	  glRotatef(45, 1, 1, 0);
 
       if (shader) shader->begin();
 	      //glutSolidTeapot(1.0);
@@ -198,7 +198,7 @@ public:
 
 	  //*** Para Textura: llamado al shader para objetos texturizados
 	  if (shader1) shader1->begin();
-		  generateMesh(ulisestexid, ulisesmodel_ptr, -0.76127, 0.559551, -0.01135382, 0, 0, 0, 0.050, 0.050, 0.050);
+		  generateMesh(ulisestexid, ulisesmodel_ptr, -0.730769, 0.488000, 0.14, 0, 0, 0, 0.050, 0.050, 0.050);
 		  // Cottage Mesh
 		  for (int i = 0; i < 2; i++) {
 			  generateMesh(cottagetexid, cottagemodel_ptr, cottagetranslations[i][0], cottagetranslations[i][1], cottagetranslations[i][2], cottagerotations[i][0], cottagerotations[i][1], cottagerotations[i][2], 1, 1, 1);
@@ -210,7 +210,7 @@ public:
 		  }
 
 		  // Boat Mesh.
-		  generateMesh(boattexid, boatmodel_ptr, -0.703945, 0.571776, 0);
+		  generateMesh(boattexid, boatmodel_ptr, -0.680769, 0.468000, 0.14);
 
 		  // Wheat Mesh.
 		  for (int i = 0; i < 5; i++) {
@@ -224,7 +224,7 @@ public:
 		  // All Cyclop Meshs.
 		  generateMesh(cycloptexid, cyclopmodel_ptr, -0.24878, 0.563547, -0.486664, 0, -86.868, 0, 0.100, 0.100, 0.100);
 		  generateMesh(cycloptexid, cyclopmodel_ptr, -0.830401, 0.574613, 0.865908, 0, 2.0291, 0, 0.100, 0.100, 0.100);
-		  generateMesh(cycloptexid, cyclopsitmodel_prt, 0.003167, 0.555244, -0.144517, 0, -89.179, 0, 0.100, 0.100, 0.100); // TODO: Encontrar esta malla que anda desaparecida.
+		  generateMesh(cycloptexid, cyclopsitmodel_ptr, 0.003167, 0.574613, 0, 0, -89.179, 0, 0.400, 0.400, 0.400);
 		  generateMesh(cycloptexid, cyclopidlemodel_ptr, -0.533495, 0.550675, 0.380219, 0, -195.56, 0, 0.200, 0.200, 0.200);
 		  generateMesh(cycloptexid, cyclopwalkingmodel_ptr, -0.46273, 0.543189, 0.682623, 0, 78.368, 0, 0.100, 0.100, 0.100);
 		  generateMesh(cycloptexid, cyclopwalkingmodel_ptr, -0.272312, 0.551474, 0.548556, 0, -63.194, 0, 0.100, 0.100, 0.100);
@@ -320,7 +320,7 @@ public:
 
 	  // All cyclops Mesh.
 	  initMesh(cyclopmodel_ptr, "./Mallas/cyclop.obj");
-	  initMesh(cyclopsitmodel_prt, "./Mallas/cyclop_sit.obj");
+	  initMesh(cyclopsitmodel_ptr, "./Mallas/cyclop_sit.obj");
 	  initMesh(cyclopidlemodel_ptr, "./Mallas/cyclop_idle.obj");
 	  initMesh(cyclopwalkingmodel_ptr, "./Mallas/cyclop_walking.obj");
 
