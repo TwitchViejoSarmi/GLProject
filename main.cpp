@@ -209,7 +209,7 @@ public:
 
 	  //*** Para Textura: llamado al shader para objetos texturizados
 	  if (shader1) shader1->begin();
-		  generateMesh(ulisestexid, ulisesmodel_ptr, -0.730769, 0.488000, 0.14, 0, 0, 0, 0.050, 0.050, 0.050);
+		  generateMesh(ulisestexid, ulisesmodel_ptr, -0.730769, 0.538000, 0.14, 0, 0, 0, 0.050, 0.050, 0.050);
 		  // Cottage Mesh
 		  for (int i = 0; i < 2; i++) {
 			  generateMesh(cottagetexid, cottagemodel_ptr, cottagetranslations[i][0], cottagetranslations[i][1], cottagetranslations[i][2], cottagerotations[i][0], cottagerotations[i][1], cottagerotations[i][2], 1, 1, 1);
