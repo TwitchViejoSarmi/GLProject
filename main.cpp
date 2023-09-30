@@ -180,7 +180,14 @@ public:
 		glPopMatrix();
 	}
 
-	
+	// Variables para el control de la cámara
+	float cameraX = 0;
+	float cameraY = 0.52;
+	float cameraZ = -1;
+	float cameraYaw = 45;
+	float cameraPitch = 0;
+	int prevMouseX = 0;
+	int prevMouseY = 0;
 
 	virtual void OnRender(void)
 	{
@@ -189,8 +196,12 @@ public:
       //timer010 = 0.09; //for screenshot!
 
       glPushMatrix();
-	  glTranslatef(0, -0.52, -1);
-	  glRotatef(45, 1, 1, 0);
+	  glTranslatef(cameraX, cameraY, cameraZ);  // Ajusta la posición de la cámara
+	  glRotatef(cameraYaw, 1, 1, 0);            // Rotación horizontal (yaw)
+	  glRotatef(cameraPitch, 1, 0, 0);          // Rotación vertical (pitch)
+
+	  //glTranslatef(0, -0.52, -1);
+	  //glRotatef(45, 1, 1, 0);
 
       if (shader) shader->begin();
 	      //glutSolidTeapot(1.0);
@@ -357,13 +368,55 @@ public:
 	virtual void OnMouseUp(int button, int x, int y) {}
 	virtual void OnMouseWheel(int nWheelNumber, int nDirection, int x, int y){}
 
+
+	// Función para el manejo de teclado
 	virtual void OnKeyDown(int nKey, char cAscii)
-	{       
+	{
+		// Control de movimiento de la cámara
+		float cameraSpeed = 0.8f;
+
 		if (cAscii == 27) // 0x1b = ESC
 		{
 			this->Close(); // Close Window!
-		} 
-	};
+		}
+
+		if (nKey == GLUT_KEY_UP) // Avanzar
+			cameraZ -= cameraSpeed;
+		else if (nKey == GLUT_KEY_DOWN) // Retroceder
+			cameraZ += cameraSpeed;
+		else if (nKey == GLUT_KEY_LEFT) // Girar izquierda
+			cameraYaw -= 3.0f;
+		else if (nKey == GLUT_KEY_RIGHT) // Girar derecha
+			cameraYaw += 3.0f;
+	}
+
+	// Función para el manejo de movimiento del ratón
+	void OnMouseMotion(int x, int y)
+	{
+		// Control de rotación de la cámara
+		float sensitivity = 0.1f;
+
+		// Calcula la diferencia de posición del ratón
+		float deltaX = x - prevMouseX;
+		float deltaY = y - prevMouseY;
+
+		// Actualiza la orientación de la cámara
+		cameraYaw += deltaX * sensitivity;
+		cameraPitch += deltaY * sensitivity;
+
+		// Limita la rotación vertical de la cámara
+		if (cameraPitch > 90.0f)
+			cameraPitch = 90.0f;
+		if (cameraPitch < -90.0f)
+			cameraPitch = -90.0f;
+
+		// Actualiza la posición anterior del ratón
+		prevMouseX = x;
+		prevMouseY = y;
+	}
+
+	// Registra las funciones de manejo de eventos en la función OnInit
+	
 
 	virtual void OnKeyUp(int nKey, char cAscii)
 	{
@@ -464,9 +517,8 @@ public:
 class myApplication : public cwc::glApplication
 {
 public:
-	virtual void OnInit() {std::cout << "Hello World!\n"; }
+	virtual void OnInit() { std::cout << "Hello World!\n"; };
 };
-
 //-----------------------------------------------------------------------------
 
 int main(void)
@@ -480,4 +532,3 @@ int main(void)
 }
 
 //-----------------------------------------------------------------------------
-
